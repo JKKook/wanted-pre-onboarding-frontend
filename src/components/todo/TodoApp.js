@@ -22,12 +22,29 @@ export default function TodoApp() {
         setLists([...lists, newList]);
     };
 
+    const handleUpdateList = (updateList) => {
+        setLists(
+            lists.map((list) =>
+                list.id === updateList.id ? updateList : list,
+            ),
+        );
+    };
+
+    const handleDelete = (deleteList) => {
+        setLists(lists.filter((list) => list.id !== deleteList.id));
+    };
+
     return (
         <section>
             <AddTodo onAdd={handleAddList} />
             <ul>
                 {lists.map((list) => (
-                    <TodoItem key={list.id} todo={list} />
+                    <TodoItem
+                        key={list.id}
+                        todo={list}
+                        onUpdate={handleUpdateList}
+                        onDelete={handleDelete}
+                    />
                 ))}
             </ul>
         </section>
