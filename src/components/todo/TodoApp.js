@@ -22,15 +22,16 @@ export default function TodoApp() {
         setLists([...lists, newList]);
     };
 
-    const handleUpdateList = (updateList) => {
+    const handleUpdateList = (id, updateList) => {
+        console.log('edit-id', id);
         setLists(
             lists.map((list) =>
-                list.id === updateList.id ? updateList : list,
+                list.id === id ? { ...list, text: updateList } : list,
             ),
         );
     };
 
-    const handleDelete = (deleteList) => {
+    const handleDeleteList = (deleteList) => {
         setLists(lists.filter((list) => list.id !== deleteList.id));
     };
 
@@ -43,7 +44,7 @@ export default function TodoApp() {
                         key={list.id}
                         todo={list}
                         onUpdate={handleUpdateList}
-                        onDelete={handleDelete}
+                        onDelete={handleDeleteList}
                     />
                 ))}
             </ul>
