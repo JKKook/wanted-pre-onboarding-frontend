@@ -17,8 +17,13 @@ export default function TodoApp() {
         },
     ]);
 
+    const handleAdd = (newList) => {
+        setLists([...lists, newList]);
+    };
+
     return (
         <section>
+            <AddTodo onAdd={handleAdd} />
             <ul>
                 {lists.map((list) => (
                     <TodoItem key={list.id} todo={list} />
