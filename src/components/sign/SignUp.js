@@ -43,6 +43,7 @@ export default function SignUp() {
                 );
 
                 if (response.ok) {
+                    alert('회원가입 성공');
                     navigate('/signin');
                 } else {
                     alert('Something wrong');
