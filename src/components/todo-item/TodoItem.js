@@ -43,7 +43,7 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
             <label>
                 <input
                     type='checkbox'
-                    checked={status === 'completed'}
+                    // checked={status === 'completed'}
                     onChange={handleChangeStatus}
                 />
                 <span>{text}</span>
