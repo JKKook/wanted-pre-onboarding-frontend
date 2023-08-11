@@ -4,6 +4,7 @@ import SignIn from './components/sign/SignIn';
 import TodoApp from './components/todo/TodoApp';
 import SignUp from './components/sign/SignUp';
 import Home from './components/Home';
+import NotFound from './NotFound';
 
 function App() {
     const [token, setToken] = useState(localStorage.getItem('token') || '');
@@ -23,6 +24,7 @@ function App() {
                     element={<SignIn onTokenChange={handleTokenChange} />}
                 />
                 <Route path='/todos' element={<TodoApp token={token} />} />
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     );
