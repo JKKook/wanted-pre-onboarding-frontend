@@ -1,27 +1,30 @@
-import { Link } from 'react-router-dom';
-import './App.css';
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SignIn from './components/sign/SignIn';
+import TodoApp from './components/todo/TodoApp';
+import SignUp from './components/sign/SignUp';
+import Home from './components/Home';
 
 function App() {
-    const contact = {
-        signUp: '/signup',
-        signIn: '/signin',
-        todoList: '/todo',
+    const [token, setToken] = useState(localStorage.getItem('token') || '');
+
+    const handleTokenChange = (newToken) => {
+        setToken(newToken);
+        localStorage.setItem('token', newToken);
     };
 
     return (
-        <section>
-            <ul>
-                <li>
-                    <Link to={contact.signUp}>회원가입</Link>
-                </li>
-                <li>
-                    <Link to={contact.signIn}>로그인</Link>
-                </li>
-                <li>
-                    <Link to={contact.todoList}>TODO</Link>
-                </li>
-            </ul>
-        </section>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route
+                    path='/signin'
+                    element={<SignIn onTokenChange={handleTokenChange} />}
+                />
+                <Route path='/todos' element={<TodoApp token={token} />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

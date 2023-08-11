@@ -1,22 +1,24 @@
 import React from 'react';
 import { useState } from 'react';
 
-export default function TodoItem({ todo, onUpdate, onDelete }) {
-    const { id, text, status } = todo;
+export default function TodoItem({ list, onUpdate, onDelete }) {
+    const { id, todo, isCompleted } = list;
 
+    const [isChecked, setIsChecked] = useState(isCompleted);
     const [isEdit, setIsEdit] = useState(false);
     const [editText, setEditText] = useState('');
 
     // 체크박스 상태 변경 (체크 시, completed)
     const handleChangeStatus = (e) => {
         onUpdate({
-            ...todo,
-            status: e.target.checked ? 'completed' : 'active',
+            ...list,
+            isCompleted: e.target.checked,
         });
+        setIsChecked(e.target.checked);
     };
 
     const handleDelete = () => {
-        onDelete(todo);
+        onDelete(list);
     };
 
     const handleClick = () => {
@@ -43,10 +45,10 @@ export default function TodoItem({ todo, onUpdate, onDelete }) {
             <label>
                 <input
                     type='checkbox'
-                    // checked={status === 'completed'}
+                    checked={isChecked}
                     onChange={handleChangeStatus}
                 />
-                <span>{text}</span>
+                <span>{todo}</span>
             </label>
             {!isEdit ? (
                 <>

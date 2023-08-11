@@ -11,7 +11,7 @@ export default function AddTodo({ onAdd }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onAdd({ id: uuidv4(), text: addText, status: 'active' });
+        onAdd({ id: uuidv4(), todo: addText, isCompleted: false });
         setAddText('');
     };
 
@@ -21,6 +21,7 @@ export default function AddTodo({ onAdd }) {
                 data-testid='new-todo-input'
                 value={addText}
                 onChange={handleChange}
+                placeholder='Add Todo'
             />
             <button data-testid='new-todo-add-button'>추가</button>
         </form>

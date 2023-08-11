@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function SignIn() {
+export default function SignIn({ onTokenChange }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -39,7 +39,11 @@ export default function SignIn() {
                 console.log('토근 발급 :', token);
                 // 발급 받은 토큰 로컬에 저장
                 localStorage.setItem('token', token);
-                navigate('/todo');
+
+                // 발급 받은 토큰 부모 컴포넌트 전달
+                onTokenChange(token);
+
+                navigate('/todos');
             } else {
                 alert('Something wrong');
             }
@@ -59,8 +63,8 @@ export default function SignIn() {
             (token && location.pathname === '/signin') ||
             location.pathname === '/signup'
         ) {
-            navigate('/todo');
-        } else if (!token && location.pathname === '/todo') {
+            navigate('/todos');
+        } else if (!token && location.pathname === '/todos') {
             navigate('/signin');
         }
     }, [navigate, location]);
