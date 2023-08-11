@@ -34,9 +34,7 @@ export default function SignIn({ onTokenChange }) {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('data:', data);
                 const token = data.access_token;
-                console.log('토근 발급 :', token);
                 // 발급 받은 토큰 로컬에 저장
                 localStorage.setItem('token', token);
 
@@ -55,7 +53,6 @@ export default function SignIn({ onTokenChange }) {
     // 토큰 유무에 따른 리다이렉팅 관리
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log('로컬에서 토큰 가져오기', token);
 
         // 조건 1. 토큰 유무
         // 조건 2. 경로

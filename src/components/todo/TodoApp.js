@@ -24,7 +24,6 @@ export default function TodoApp({ token }) {
                         }),
                     },
                 );
-                console.log('토큰 통신 :', response);
 
                 if (response.ok) {
                     const data = await response.json();
@@ -50,7 +49,6 @@ export default function TodoApp({ token }) {
     };
 
     const handleUpdateList = (id, updateList) => {
-        console.log('edit-id', id);
         setLists(
             lists.map((list) =>
                 list.id === id ? { ...list, todo: updateList } : list,
